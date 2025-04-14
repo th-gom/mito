@@ -1,64 +1,37 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import { Home } from './pages/home'
-import { Pedidos } from './pages/pedidos'
-import { Ionicons } from '@expo/vector-icons'
-
+// src/routes.js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home } from './pages/home/index';
+import { Pedidos } from './pages/segundaHome';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-export function Routes(){
+export function Routes() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="home"
+        component={Home}
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused, size, color }) => {
+            return <Ionicons size={size} color={color} name={focused ? "home-sharp" : "home-sharp"} />;
+          }
+        }}
+      />
 
-    return(
-
-        <Tab.Navigator>
-         <Tab.Screen
-         name= "home"
-         component={Home}
-         options={{
-           headerShown: false,
-           tabBarShowLabel: false,
-           tabBarIcon: ({ focused, size, color}) => {
- 
-            if (focused){
-                  return <Ionicons size={size} color={color} name="home-sharp" />
-
-            }
-            return <Ionicons size={size} color={color} name="home-sharp" />
-
-           }
-
-         }}
-         
-         />
-
-         <Tab.Screen
-         name="pedidos"
-         component={Pedidos}
-         options={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarIcon: ({ focused, size, color}) => {
-  
-             if (focused){
-                   return <Ionicons size={size} color={color} name="book" />
- 
-             }
-             return <Ionicons size={size} color={color} name="book" />
- 
-            }
- 
-          }}
-         
-
-
-         />
-
-
-        </Tab.Navigator>
-
-    )
-
-
-
-
+      <Tab.Screen
+        name="pedidos"
+        component={Pedidos} 
+        options={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused, size, color }) => {
+            return <Ionicons size={size} color={color} name={focused ? "book" : "book"} />;
+          }
+        }}
+      />
+    </Tab.Navigator>
+  );
 }
